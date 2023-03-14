@@ -1,0 +1,49 @@
+timing on
+Timing is on.
+select
+c_custkey,
+c_name,
+sum(l_extendedprice * (1 - l_discount)) as revenue, c_acctbal,
+n_name,
+c_address,
+c_phone,
+c_comment
+from
+customer,
+orders, lineitem, nation
+where
+c_custkey = o_custkey
+and l_orderkey = o_orderkey
+and o_orderdate >= date '1993-08-01'
+and o_orderdate < date '1993-08-01' + interval '3' month and l_returnflag = 'R'
+and c_nationkey = n_nationkey
+group by c_custkey,
+c_name, c_acctbal, c_phone, n_name, c_address, c_comment
+order by
+revenue desc
+limit 20;
+ c_custkey |       c_name       |   revenue    | c_acctbal |          n_name           |                c_address                 |     c_phone     |                                                     c_comment                                                     
+-----------+--------------------+--------------+-----------+---------------------------+------------------------------------------+-----------------+-------------------------------------------------------------------------------------------------------------------
+   5896225 | Customer#005896225 | 1023217.8194 |   5859.20 | VIETNAM                   | VNm5z2yhAjOsXuxbjGk5lQQRT                | 31-514-353-9614 | ests haggle carefully. slyly express deposits alongside of the requests use even packages. slyly bold dinos af
+   2004817 | Customer#002004817 |  915550.5350 |   2980.88 | RUSSIA                    | b4f 3rAcLw3iPTgbMIETEL                   | 32-962-165-3153 | eas print permanently carefully bold requests. 
+   2910823 | Customer#002910823 |  875612.0984 |   3889.92 | VIETNAM                   | T9Olc9C HL6dy29VMq TOzAPziHqO6lNu        | 31-714-206-2851 | ously. even deposits affix after the regular, final accounts. requests solve above the blithely unus
+   5877442 | Customer#005877442 |  859697.6099 |   9463.80 | PERU                      | AkGnBZbDMj4HtLd4 q4                      | 27-772-119-8455 | y after the furiously regular deposits. special accounts boost carefully even pinto beans. bl
+   1752700 | Customer#001752700 |  829783.0546 |   5530.51 | MOZAMBIQUE                | CSy9XTqUzJ31ZWkvy3rgipjZL9C              | 26-648-756-8933 | . unusual excuses boost blithely. carefully regular reques
+   6186259 | Customer#006186259 |  829533.2460 |   9444.58 | INDONESIA                 | ,4yqIhmaGioIrF4                          | 19-351-206-8945 | ccounts. fluffily special pinto beans cajole carefully. express, thin pinto beans at the fluffily brave accounts 
+   6184613 | Customer#006184613 |  798478.5679 |   9062.57 | CHINA                     | ZYEkA4Jfpj                               | 28-810-498-8351 | s along the packages haggle furiously about the quickly bold theodolites. blithely express 
+   3234703 | Customer#003234703 |  798382.1482 |   4016.50 | ALGERIA                   | tD8VY5gQLIEGgLNxYMHv                     | 10-839-428-2085 | he pinto beans. final realms nag carefully regular attainments. iro
+   1873120 | Customer#001873120 |  792019.3147 |   7979.62 | SAUDI ARABIA              | kux4cFGtNSteMgAxC7KmtRoUKEo3I7w3Vj8Y     | 30-553-810-1362 | lets above the slyly bold requests use slyl
+   3200479 | Customer#003200479 |  789445.2644 |   9293.68 | PERU                      | 5sz,oJhvOpGT qwqztczL5X tE               | 27-527-940-2986 | sts boost carefully above the carefully even gifts. regular accounts haggle re
+   2075236 | Customer#002075236 |  786868.1337 |   2762.01 | INDONESIA                 | hnMYwpJhJYhvGL3NItH aFuKogkdssOH,HOSGccI | 19-453-545-4572 | phs cajole slyly. accounts use slyly by the theodolites. instructions wake fluffily slyly 
+   3550039 | Customer#003550039 |  785104.6218 |   5750.47 | ALGERIA                   | ,5sPp4lBYpq,zs,q0uK                      | 10-529-860-7193 | ets sleep furiously across the regular requests. acco
+   1106881 | Customer#001106881 |  775719.5468 |   8687.31 | SAUDI ARABIA              | ycAv,oLWwZ                               | 30-885-850-7107 | l orbits. blithely special foxes detect slyly furiously express requests. slyly unusual instructions a
+   3202717 | Customer#003202717 |  773922.7368 |   6676.61 | VIETNAM                   | PDacbm3yYC6lrUfZSZSMPtrw ,6Kc0w7h        | 31-130-437-4330 | en ideas after the slyly speci
+   3580675 | Customer#003580675 |  768581.5177 |   3226.93 | MOZAMBIQUE                | LOLlx30z4q16w3w5K                        | 26-657-660-5901 | olites. special pinto beans nod. sly
+   5245456 | Customer#005245456 |  767880.2302 |   -152.91 | PERU                      | 5OmLFbSXN0K                              | 27-802-782-7946 | lithely. deposits cajole fluffily express packages
+   5417455 | Customer#005417455 |  766860.1184 |   5948.05 | FRANCE                    | KkT84y49,S,D2CB01mBm4ivvKAR,fRgnj9zg     | 16-363-988-4181 | sits. courts along the regular, unusual dependencies detect fluffily care
+   1675888 | Customer#001675888 |  763425.2817 |   4631.76 | GERMANY                   | TIhzwCcA1gmOgffoNp5MKqUR1REnwSviIz       | 17-526-868-7060 | g packages: blithely even ideas cajole slyly of the regular, express packages. ironic braids at th
+   3171151 | Customer#003171151 |  763211.1116 |   -197.72 | KENYA                     | oG0F99XXnSvaj4OnTA4JfWNSSuf              | 24-761-138-6844 | lets integrate about the packages: furiously ironic requests are slyly about the carefull
+   5268427 | Customer#005268427 |  756432.3341 |   1259.09 | INDONESIA                 | kDHQVjecrGoQYBMOg9T                      | 19-253-435-4223 | arefully alongside of the special theodolites. quietly regular theodolites haggle carefully after 
+(20 rows)
+
+Time: 97584.255 ms (01:37.584)

@@ -1,0 +1,52 @@
+timing on
+Timing is on.
+select supp_nation,
+    cust_nation,
+    l_year,
+    sum(volume) as revenue
+from (
+        select n1.n_name as supp_nation,
+            n2.n_name as cust_nation,
+            extract(
+                year
+                from l_shipdate
+            ) as l_year,
+            l_extendedprice * (1 - l_discount) as volume
+        from supplier,
+            lineitem,
+            orders,
+            customer,
+            nation n1,
+            nation n2
+        where s_suppkey = l_suppkey
+            and o_orderkey = l_orderkey
+            and c_custkey = o_custkey
+            and s_nationkey = n1.n_nationkey
+            and c_nationkey = n2.n_nationkey
+            and (
+                (
+                    n1.n_name = 'JAPAN'
+                    and n2.n_name = 'INDIA'
+                )
+                or (
+                    n1.n_name = 'INDIA'
+                    and n2.n_name = 'JAPAN'
+                )
+            )
+            and l_shipdate between date '1995-01-01' and date '1996-12-31'
+    ) as shipping
+group by supp_nation,
+    cust_nation,
+    l_year
+order by supp_nation,
+    cust_nation,
+    l_year;
+        supp_nation        |        cust_nation        | l_year |     revenue     
+---------------------------+---------------------------+--------+-----------------
+ INDIA                     | JAPAN                     |   1995 | 2643560311.7630
+ INDIA                     | JAPAN                     |   1996 | 2635620289.0596
+ JAPAN                     | INDIA                     |   1995 | 2658149143.6450
+ JAPAN                     | INDIA                     |   1996 | 2657756362.8598
+(4 rows)
+
+Time: 92630.452 ms (01:32.630)

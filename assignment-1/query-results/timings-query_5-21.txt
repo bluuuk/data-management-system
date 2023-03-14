@@ -1,0 +1,139 @@
+timing on
+Timing is on.
+select
+s_name,
+count(*) as numwait from
+supplier, lineitem l1, orders, nation
+where
+s_suppkey = l1.l_suppkey
+and o_orderkey = l1.l_orderkey
+and o_orderstatus = 'F'
+and l1.l_receiptdate > l1.l_commitdate and exists (
+select
+*
+from
+lineitem l2
+where
+l2.l_orderkey = l1.l_orderkey
+and l2.l_suppkey <> l1.l_suppkey
+)
+and not exists (
+select
+*
+from
+lineitem l3
+where
+l3.l_orderkey = l1.l_orderkey
+and l3.l_suppkey <> l1.l_suppkey
+and l3.l_receiptdate > l3.l_commitdate
+)
+and s_nationkey = n_nationkey and n_name = 'EGYPT'
+group by s_name
+order by
+numwait desc,
+s_name limit 100;
+          s_name           | numwait 
+---------------------------+---------
+ Supplier#000371373        |      25
+ Supplier#000386724        |      24
+ Supplier#000088242        |      22
+ Supplier#000302926        |      22
+ Supplier#000359050        |      22
+ Supplier#000403314        |      22
+ Supplier#000484325        |      22
+ Supplier#000032120        |      21
+ Supplier#000082728        |      21
+ Supplier#000106723        |      21
+ Supplier#000126319        |      21
+ Supplier#000133574        |      21
+ Supplier#000134443        |      21
+ Supplier#000138924        |      21
+ Supplier#000162755        |      21
+ Supplier#000188914        |      21
+ Supplier#000206125        |      21
+ Supplier#000247078        |      21
+ Supplier#000389830        |      21
+ Supplier#000431860        |      21
+ Supplier#000439537        |      21
+ Supplier#000468216        |      21
+ Supplier#000012693        |      20
+ Supplier#000016539        |      20
+ Supplier#000020186        |      20
+ Supplier#000038542        |      20
+ Supplier#000057477        |      20
+ Supplier#000067645        |      20
+ Supplier#000082788        |      20
+ Supplier#000097188        |      20
+ Supplier#000137128        |      20
+ Supplier#000155824        |      20
+ Supplier#000165202        |      20
+ Supplier#000174650        |      20
+ Supplier#000182157        |      20
+ Supplier#000198042        |      20
+ Supplier#000200570        |      20
+ Supplier#000224016        |      20
+ Supplier#000229277        |      20
+ Supplier#000259566        |      20
+ Supplier#000275103        |      20
+ Supplier#000284873        |      20
+ Supplier#000313987        |      20
+ Supplier#000330795        |      20
+ Supplier#000340206        |      20
+ Supplier#000341741        |      20
+ Supplier#000345639        |      20
+ Supplier#000348285        |      20
+ Supplier#000372603        |      20
+ Supplier#000387242        |      20
+ Supplier#000389332        |      20
+ Supplier#000389553        |      20
+ Supplier#000390281        |      20
+ Supplier#000400070        |      20
+ Supplier#000440416        |      20
+ Supplier#000443970        |      20
+ Supplier#000478069        |      20
+ Supplier#000479194        |      20
+ Supplier#000484777        |      20
+ Supplier#000492859        |      20
+ Supplier#000010665        |      19
+ Supplier#000015240        |      19
+ Supplier#000021997        |      19
+ Supplier#000023694        |      19
+ Supplier#000025523        |      19
+ Supplier#000030641        |      19
+ Supplier#000032804        |      19
+ Supplier#000032949        |      19
+ Supplier#000034824        |      19
+ Supplier#000044677        |      19
+ Supplier#000052862        |      19
+ Supplier#000053763        |      19
+ Supplier#000069971        |      19
+ Supplier#000077005        |      19
+ Supplier#000077926        |      19
+ Supplier#000099350        |      19
+ Supplier#000102844        |      19
+ Supplier#000103742        |      19
+ Supplier#000111763        |      19
+ Supplier#000113245        |      19
+ Supplier#000129443        |      19
+ Supplier#000133478        |      19
+ Supplier#000153902        |      19
+ Supplier#000155655        |      19
+ Supplier#000157216        |      19
+ Supplier#000158387        |      19
+ Supplier#000158390        |      19
+ Supplier#000165903        |      19
+ Supplier#000177476        |      19
+ Supplier#000179785        |      19
+ Supplier#000179899        |      19
+ Supplier#000182532        |      19
+ Supplier#000185116        |      19
+ Supplier#000186760        |      19
+ Supplier#000199687        |      19
+ Supplier#000202993        |      19
+ Supplier#000222664        |      19
+ Supplier#000239720        |      19
+ Supplier#000243283        |      19
+ Supplier#000247115        |      19
+(100 rows)
+
+Time: 958320.060 ms (15:58.320)

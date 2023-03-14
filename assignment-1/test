@@ -1,0 +1,87 @@
+==> timings-query_1.txt <==
+
+Time: 87567.773 ms (01:27.568)
+
+==> timings-query_10.txt <==
+
+Time: 93712.955 ms (01:33.713)
+
+==> timings-query_11.txt <==
+
+Time: 21450.604 ms (00:21.451)
+
+==> timings-query_12.txt <==
+
+Time: 90478.709 ms (01:30.479)
+
+==> timings-query_13.txt <==
+
+Time: 44355.112 ms (00:44.355)
+
+==> timings-query_14.txt <==
+
+Time: 67104.665 ms (01:07.105)
+
+==> timings-query_15.txt <==
+DROP VIEW
+Time: 10.777 ms
+
+==> timings-query_16.txt <==
+
+Time: 21090.165 ms (00:21.090)
+
+==> timings-query_17.txt <==
+where
+l_partkey = p_partkey);
+
+==> timings-query_18.txt <==
+
+Time: 547011.112 ms (09:07.011)
+
+==> timings-query_19.txt <==
+
+Time: 62840.925 ms (01:02.841)
+
+==> timings-query_2.txt <==
+
+Time: 50388.518 ms (00:50.389)
+
+==> timings-query_20.txt <==
+    and n_name = 'ALGERIA'
+order by s_name;
+
+==> timings-query_21.txt <==
+
+Time: 1700577.510 ms (28:20.578)
+
+==> timings-query_22.txt <==
+
+Time: 36049.421 ms (00:36.049)
+
+==> timings-query_3.txt <==
+
+Time: 112424.478 ms (01:52.424)
+
+==> timings-query_4.txt <==
+
+Time: 122949.054 ms (02:02.949)
+
+==> timings-query_5.txt <==
+
+Time: 110163.871 ms (01:50.164)
+
+==> timings-query_6.txt <==
+
+Time: 59639.816 ms (00:59.640)
+
+==> timings-query_7.txt <==
+
+Time: 91476.344 ms (01:31.476)
+
+==> timings-query_8.txt <==
+
+Time: 90381.255 ms (01:30.381)
+
+==> timings-query_9.txt <==
+
+Time: 318893.927 ms (05:18.894)

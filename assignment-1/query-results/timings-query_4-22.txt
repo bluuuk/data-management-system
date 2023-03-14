@@ -1,0 +1,42 @@
+timing on
+Timing is on.
+SELECT cntrycode,
+    count(*) as numcust,
+    sum(c_acctbal) as totacctbal
+from(
+        select substring(
+                c_phone
+                from 1 for 2
+            ) as cntrycode,
+            c_acctbal
+        from customer
+        where substring(
+                c_phone
+                from 1 for 2
+            ) in ('20', '40', '22', '30', '39', '42', '21')
+            and c_acctbal > (
+                select avg(c_acctbal)
+                from customer
+                where c_acctbal > 0.00
+                    and substring(
+                        c_phone
+                        from 1 for 2
+                    ) in ('20', '40', '22', '30', '39', '42', '21')
+            )
+            and not exists (
+                select *
+                from orders
+                where o_custkey = c_custkey
+            )
+    ) as custsale
+group by cntrycode
+order by cntrycode;
+ cntrycode | numcust |  totacctbal  
+-----------+---------+--------------
+ 20        |   45578 | 341913902.20
+ 21        |   45409 | 340583805.15
+ 22        |   44981 | 337005511.21
+ 30        |   45736 | 343169095.75
+(4 rows)
+
+Time: 34862.096 ms (00:34.862)

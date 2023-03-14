@@ -6,9 +6,12 @@ CONTAINER_ANACONDA=dms-anaconda
 
 postgres-up:
 	@docker start $(CONTAINER)
+	@docker start $(CONTAINER_ANACONDA)
 
 postgres-down:
 	@docker stop $(CONTAINER)
+	@docker stop $(CONTAINER_ANACONDA)
+
 
 create-postgres:
 	docker run \
@@ -22,10 +25,10 @@ create-postgres:
 create-anaconda:
 	docker run \
 	--name $(CONTAINER_ANACONDA) \
-	-i -t -p 8888:8888 continuumio/miniconda3 /bin/bash \
+	-i -t -p 9090:9090 continuumio/anaconda3 /bin/bash \
 	-c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir \
 	/opt/notebooks && /opt/conda/bin/jupyter notebook \
-	--notebook-dir=/opt/notebooks --ip='*' --port=8888 \
+	--notebook-dir=/opt/notebooks --ip='*' --port=9090 \
 	--no-browser --allow-root --NotebookApp.allow_origin='*'" 
 
 clean:

@@ -1,0 +1,33 @@
+timing on
+Timing is on.
+create view revenue0 (supplier_no, total_revenue) as
+select l_suppkey,
+    sum(l_extendedprice * (1 - l_discount))
+from lineitem
+where l_shipdate >= date '1997-07-01'
+    and l_shipdate < date '1997-07-01' + interval '3' month
+group by l_suppkey;
+CREATE VIEW
+Time: 27.129 ms
+select s_suppkey,
+    s_name,
+    s_address,
+    s_phone,
+    total_revenue
+from supplier,
+    revenue0
+where s_suppkey = supplier_no
+    and total_revenue = (
+        select max(total_revenue)
+        from revenue0
+    )
+order by s_suppkey;
+ s_suppkey |          s_name           |               s_address                |     s_phone     | total_revenue 
+-----------+---------------------------+----------------------------------------+-----------------+---------------
+    193947 | Supplier#000193947        | PIiZYfGV MgfIHlZrZrfajxEWTqGCkQbrW,S7Y | 18-777-399-5847 |  2378001.0683
+(1 row)
+
+Time: 131829.573 ms (02:11.830)
+drop view revenue0;
+DROP VIEW
+Time: 8.525 ms

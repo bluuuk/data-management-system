@@ -1,0 +1,66 @@
+timing on
+Timing is on.
+select c_count,
+    count(*) as custdist
+from (
+        select c_custkey,
+            count(o_orderkey) as c_count
+        from customer
+            left outer join orders on c_custkey = o_custkey
+            and o_comment not like '%pending%deposits%'
+        group by c_custkey
+    ) c_orders
+group by c_count
+order by custdist desc,
+    c_count desc;
+ c_count | custdist 
+---------+----------
+       0 |  2500121
+      10 |   333066
+       9 |   327967
+      11 |   313700
+       8 |   292738
+      12 |   280043
+      13 |   249787
+      19 |   235632
+       7 |   232755
+      18 |   232694
+      20 |   229011
+      17 |   226174
+      14 |   225561
+      16 |   217542
+      15 |   215739
+      21 |   214545
+      22 |   190934
+      23 |   163686
+       6 |   162493
+      24 |   134185
+      25 |   105439
+       5 |    96523
+      26 |    78913
+      27 |    57187
+       4 |    47562
+      28 |    40125
+      29 |    26802
+       3 |    18655
+      30 |    17527
+      31 |    10998
+      32 |     6649
+       2 |     5515
+      33 |     3896
+      34 |     2206
+      35 |     1195
+       1 |     1080
+      36 |      679
+      37 |      338
+      38 |      172
+      39 |       81
+      40 |       39
+      41 |       27
+      42 |       10
+      45 |        3
+      44 |        3
+      43 |        3
+(46 rows)
+
+Time: 54237.470 ms (00:54.237)

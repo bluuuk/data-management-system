@@ -1,0 +1,26 @@
+Key,Time
+"l_partkey, l_suppkey",309.937179
+"l_partkey, l_suppkey",306.157608
+l_orderkey,235.53916
+"l_partkey, l_suppkey",302.71952600000003
+l_orderkey,239.316032
+"l_partkey, l_suppkey",304.325413
+l_orderkey,232.625149
+"l_partkey, l_suppkey",303.768421
+l_orderkey,239.83935300000002
+l_orderkey,239.78457999999998
+o_custkey,70.403339
+o_custkey,66.32775
+o_custkey,70.113177
+o_custkey,66.526355
+o_custkey,69.33143399999999
+ps_partkey,32.650985
+ps_suppkey,26.640566
+ps_partkey,33.847415
+ps_suppkey,27.593588
+ps_partkey,33.990935
+ps_suppkey,26.550603
+ps_partkey,33.779796000000005
+ps_suppkey,26.424401999999997
+ps_partkey,32.606522
+ps_suppkey,25.833757000000002

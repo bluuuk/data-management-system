@@ -15,7 +15,7 @@ prepare-data:
 
 postgres-up:
 	@docker start $(CONTAINER)
-	sleep 10
+	sleep 15
 
 postgres-down:
 	@docker stop $(CONTAINER)
@@ -65,3 +65,11 @@ execute-queries-timing: postgres-up
 			PGPASSWORD=$(POSTGRES_PASSWORD) psql -h localhost --u postgres  -c '\timing on' -w -a -f queries/$${query}.sql > query-results/timings-query_$${run}-$${query}.txt ;\
 		done ; \
 	done
+
+execute-queries-concurrent: 2.sql 6.sql 13.sql 14.sql 19.sql
+	echo executing
+
+RUN=5
+
+%.sql:
+	PGPASSWORD=$(POSTGRES_PASSWORD) psql -h localhost --u postgres  -c '\timing on' -w -a -f queries/$@ > concurrent/timings-query_$(RUN)-$(shell echo $@ | tr -d ".sql").txt
